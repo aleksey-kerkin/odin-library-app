@@ -17,6 +17,7 @@ Book.prototype.toggleReadStatus = function () {
 function addBookToLibrary(title, author, pages, isRead) {
   const newBook = new Book(title, author, pages, isRead);
   myLibrary.push(newBook);
+  displayLibrary(); // Update the table after adding a book
 }
 
 // Function to display the library in the table
@@ -68,7 +69,47 @@ function removeBook(event) {
   displayLibrary(); // Update the table
 }
 
+// Get references to the dialog and buttons
+const dialog = document.getElementById("bookDialog");
+const openDialogButton = document.getElementById("openDialog");
+const closeDialogButton = document.getElementById("closeDialog");
+
+// Open the dialog when the "Add Book" button is clicked
+openDialogButton.addEventListener("click", () => {
+  dialog.showModal();
+});
+
+// Close the dialog when the "Close" button is clicked
+closeDialogButton.addEventListener("click", () => {
+  dialog.close();
+});
+
+// Handle form submission
+document
+  .getElementById("bookForm")
+  .addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent the form from submitting
+
+    // Get form values
+    const title = document.getElementById("title").value;
+    const author = document.getElementById("author").value;
+    const pages = parseInt(document.getElementById("pages").value);
+    const isRead = document.getElementById("isRead").checked;
+
+    // Add the book to the library
+    addBookToLibrary(title, author, pages, isRead);
+
+    // Reset the form and close the dialog
+    event.target.reset();
+    dialog.close();
+  });
+
 // Example usage
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 310, true);
-addBookToLibrary("1984", "George Orwell", 328, false);
+addBookToLibrary(
+  "Harry Potter and the Chamber of Secrets",
+  "J. K. Rowling",
+  251,
+  false
+);
 displayLibrary(); // Render the initial table
