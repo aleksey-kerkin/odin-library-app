@@ -17,41 +17,38 @@ Book.prototype.toggleReadStatus = function () {
 function addBookToLibrary(title, author, pages, isRead) {
   const newBook = new Book(title, author, pages, isRead);
   myLibrary.push(newBook);
-  displayLibrary(); // Update the table after adding a book
+  displayLibrary(); // Update the display after adding a book
 }
 
-// Function to display the library in the table
+// Function to display the library as cards
 function displayLibrary() {
-  const tableBody = document.getElementById("libraryTableBody");
-  tableBody.innerHTML = ""; // Clear existing rows
+  const libraryCardsContainer = document.getElementById(
+    "libraryCardsContainer"
+  );
+  libraryCardsContainer.innerHTML = ""; // Clear existing cards
 
   myLibrary.forEach((book, index) => {
-    const row = tableBody.insertRow();
+    const card = document.createElement("div");
+    card.classList.add("card");
 
-    // Add book details to the row
-    row.insertCell().textContent = book.title;
-    row.insertCell().textContent = book.author;
-    row.insertCell().textContent = book.pages;
+    // Add book details to the card
+    card.innerHTML = `
+      <h3>${book.title}</h3>
+      <p><strong>Author:</strong> ${book.author}</p>
+      <p><strong>Pages:</strong> ${book.pages}</p>
+      <p><strong>Status:</strong> ${book.isRead ? "Read" : "Unread"}</p>
+      <button data-index="${index}" class="toggleReadStatus">Toggle Read Status</button>
+      <button data-index="${index}" class="removeBook">Remove</button>
+    `;
 
-    // Add a cell for the read status
-    const readCell = row.insertCell();
-    readCell.textContent = book.isRead ? "Yes" : "No";
+    // Add event listeners for the buttons
+    card
+      .querySelector(".toggleReadStatus")
+      .addEventListener("click", toggleReadStatus);
+    card.querySelector(".removeBook").addEventListener("click", removeBook);
 
-    // Add a "Toggle Read Status" button with a data-attribute for the book's index
-    const toggleCell = row.insertCell();
-    const toggleButton = document.createElement("button");
-    toggleButton.textContent = "Toggle Read Status";
-    toggleButton.setAttribute("data-index", index); // Associate the button with the book's index
-    toggleButton.addEventListener("click", toggleReadStatus); // Add event listener
-    toggleCell.appendChild(toggleButton);
-
-    // Add a "Remove" button with a data-attribute for the book's index
-    const removeCell = row.insertCell();
-    const removeButton = document.createElement("button");
-    removeButton.textContent = "Remove";
-    removeButton.setAttribute("data-index", index); // Associate the button with the book's index
-    removeButton.addEventListener("click", removeBook); // Add event listener
-    removeCell.appendChild(removeButton);
+    // Append the card to the container
+    libraryCardsContainer.appendChild(card);
   });
 }
 
@@ -59,14 +56,14 @@ function displayLibrary() {
 function toggleReadStatus(event) {
   const index = event.target.getAttribute("data-index"); // Get the book's index
   myLibrary[index].toggleReadStatus(); // Toggle the read status
-  displayLibrary(); // Re-render the table
+  displayLibrary(); // Re-render the cards
 }
 
 // Function to remove a book from the library
 function removeBook(event) {
   const index = event.target.getAttribute("data-index"); // Get the book's index
   myLibrary.splice(index, 1); // Remove the book from the array
-  displayLibrary(); // Update the table
+  displayLibrary(); // Update the display
 }
 
 // Get references to the dialog and buttons
@@ -106,10 +103,5 @@ document
 
 // Example usage
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 310, true);
-addBookToLibrary(
-  "Harry Potter and the Chamber of Secrets",
-  "J. K. Rowling",
-  251,
-  false
-);
-displayLibrary(); // Render the initial table
+addBookToLibrary("1984", "George Orwell", 328, false);
+displayLibrary(); // Render the initial cards

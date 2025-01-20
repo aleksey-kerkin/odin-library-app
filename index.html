@@ -23,27 +23,15 @@
         <label for="pages">Pages:</label>
         <input type="number" id="pages" name="pages" required />
 
-        <label for="isRead">Read:</label>
+        <label for="isRead">Read already?</label>
         <input type="checkbox" id="isRead" name="isRead" />
 
         <button type="submit">Add Book</button>
         <button type="button" id="closeDialog">Close</button>
       </form>
     </dialog>
-    <table>
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Pages</th>
-          <th>Read?</th>
-          <th>Toggle Read Status</th>
-          <th>Remove</th>
-        </tr>
-      </thead>
-      <tbody id="libraryTableBody">
-        <!-- Rows will be dynamically added here -->
-      </tbody>
-    </table>
+    <div id="libraryCardsContainer">
+      <!-- Cards will be dynamically added here -->
+    </div>
   </body>
 </html>
