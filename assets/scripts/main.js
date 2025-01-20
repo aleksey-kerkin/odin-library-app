@@ -21,11 +21,28 @@ function displayLibrary() {
 
   myLibrary.forEach((book, index) => {
     const row = tableBody.insertRow();
+
+    // Add book details to the row
     row.insertCell().textContent = book.title;
     row.insertCell().textContent = book.author;
     row.insertCell().textContent = book.pages;
     row.insertCell().textContent = book.isRead ? "Yes" : "No";
+
+    // Add a "Remove" button with a data-attribute for the book's index
+    const removeCell = row.insertCell();
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "Remove";
+    removeButton.setAttribute("data-index", index); // Associate the button with the book's index
+    removeButton.addEventListener("click", removeBook); // Add event listener
+    removeCell.appendChild(removeButton);
   });
+}
+
+// Function to remove a book from the library
+function removeBook(event) {
+  const index = event.target.getAttribute("data-index"); // Get the book's index from the data-attribute
+  myLibrary.splice(index, 1); // Remove the book from the array
+  displayLibrary(); // Update the table
 }
 
 // Get references to the dialog and buttons
