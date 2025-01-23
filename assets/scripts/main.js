@@ -33,8 +33,10 @@ function displayLibrary() {
 
     // Add book details to the card
     card.innerHTML = `
+      <div>
       <h3>&laquo;${book.title}&raquo;</h3>
       <button data-index="${index}" class="removeBook">✖</button>
+      </div>
       <p><strong>Author:</strong> ${book.author}</p>
       <p><strong>Pages:</strong> ${book.pages}</p>
       <p class="${book.isRead ? "color-green" : "color-red"}">

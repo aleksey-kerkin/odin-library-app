@@ -89,7 +89,12 @@ form button {
 .card {
   /* border: 1px solid rgba(125, 125, 125, 0.2); */
   border-radius: 0.3rem;
-  padding: 1.2rem;
+  /* align-content: end; */
+  padding: 1.5rem;
+  padding-right: 1rem;
+  line-height: 1;
+  display: grid;
+  grid-template-rows: 1fr 2.05ch 2.05ch 2.05ch;
   /* height: 13rem; */
   /* background-color: rgba(50, 100, 150, 0.2); */
   background: linear-gradient(
@@ -108,30 +113,30 @@ form button {
 }
 
 .card p {
-  margin: 0.3rem 0;
+  font-size: 1.25rem;
+  /* line-height: 1; */
+  align-self: end;
+  margin: 0.2rem 0;
 }
 
 .card button {
-  /* text-align: left; */
-  float: right;
-  font-size: 1rem;
   text-align: center;
+  line-height: 1;
   padding: 0;
   margin: 0;
-  width: 3ch;
-  height: 3ch;
+  /* width: 3ch;
+  height: 3ch; */
   background: transparent;
   transition: color 0.3s ease;
-
-  &:hover {
-    color: rgba(50, 100, 150, 0.9);
-  }
 }
 
 button.removeBook {
   float: right;
   font-size: 1rem;
   text-align: center;
+  position: relative;
+  top: -2ch;
+  right: -1ch;
   padding: 0;
   margin: 0;
   width: 3ch;
