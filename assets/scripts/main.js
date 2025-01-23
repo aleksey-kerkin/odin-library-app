@@ -33,12 +33,19 @@ function displayLibrary() {
 
     // Add book details to the card
     card.innerHTML = `
-      <h3>${book.title}</h3>
+      <h3>&laquo;${book.title}&raquo;</h3>
+      <button data-index="${index}" class="removeBook">✖</button>
       <p><strong>Author:</strong> ${book.author}</p>
       <p><strong>Pages:</strong> ${book.pages}</p>
-      <p><strong>Status:</strong> ${book.isRead ? "Read" : "Unread"}</p>
-      <button data-index="${index}" class="toggleReadStatus">Toggle Read Status</button>
-      <button data-index="${index}" class="removeBook">Remove</button>
+      <p class="${book.isRead ? "color-green" : "color-red"}">
+        <strong style="color: black;">Status:</strong>
+        ${book.isRead ? "Read" : "Unread"}
+        <button 
+          data-index="${index}"
+          class="toggleReadStatus ${book.isRead ? "color-green" : "color-red"}">
+          ${book.isRead ? "🆄" : "🆁"}
+        </button>
+      </p>
     `;
 
     // Add event listeners for the buttons
@@ -104,4 +111,10 @@ document
 // Example usage
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 310, true);
 addBookToLibrary("1984", "George Orwell", 328, false);
+addBookToLibrary(
+  "Harry Potter and the Philosopher's Stone",
+  "J. K. Rowling",
+  223,
+  false
+);
 displayLibrary(); // Render the initial cards
