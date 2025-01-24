@@ -89,8 +89,10 @@ dialog::backdrop {
 }
 
 form label {
+  justify-self: start;
   display: block;
-  margin-top: 0.75rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.2rem;
 }
 
 form input,
@@ -98,6 +100,37 @@ form button {
   padding: 0.5rem;
 }
 
+form input {
+  border-style: none;
+  outline-style: none;
+
+  &[type="text"],
+  &[type="number"] {
+    outline: 3px solid rgba(220, 220, 225);
+    border-radius: 0.3rem;
+    background: transparent;
+    transition: 0.3s ease;
+  }
+
+  &:focus[type="text"],
+  &:focus[type="number"] {
+    outline: 3px solid rgba(50, 100, 150, 0.5);
+  }
+}
+
+form p {
+  display: grid;
+  margin-top: 0.25rem;
+  justify-items: center;
+  align-items: center;
+  column-gap: 0.25rem;
+  & input[type="checkbox"] {
+    align-self: center;
+    padding: 0;
+    margin: 0;
+    margin-top: 0.3rem;
+  }
+}
 form button {
   margin-top: 1rem;
 }
