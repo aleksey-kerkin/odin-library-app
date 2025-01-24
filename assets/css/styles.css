@@ -52,11 +52,36 @@ button {
 }
 
 dialog {
-  width: 300px;
-  padding: 20px;
-  border: 1px solid #ccc;
+  align-self: start;
+  justify-self: center;
+  justify-items: center;
+  width: min(19rem, 70dvw);
+  padding: 0.5rem;
+  margin: 1rem;
+  margin-top: 10%;
+  border: none;
   border-radius: 0.3rem;
-  box-shadow: 0 1ch 2ch rgba(0, 0, 0, 0.5);
+  background: linear-gradient(
+    135deg,
+    rgba(220, 220, 225, 1),
+    rgba(50, 100, 150, 1)
+  );
+  box-shadow: 0 1ch 2ch rgba(0, 0, 0, 0.2);
+  & form {
+    justify-items: center;
+  }
+  & p {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-auto-flow: column;
+    & input {
+      align-self: end;
+      justify-self: start;
+      height: 1rem;
+      margin-right: 1rem;
+    }
+  }
 }
 
 dialog::backdrop {
@@ -65,18 +90,16 @@ dialog::backdrop {
 
 form label {
   display: block;
-  margin-top: 10px;
+  margin-top: 0.75rem;
 }
 
 form input,
 form button {
-  margin-top: 5px;
-  width: 100%;
-  padding: 8px;
+  padding: 0.5rem;
 }
 
 form button {
-  margin-top: 15px;
+  margin-top: 1rem;
 }
 
 #libraryCardsContainer {
